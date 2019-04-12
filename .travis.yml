@@ -5,15 +5,17 @@ services:
 
 os: linux
 
-matrix:
-  include:
-  - name: "raspbian_crosscompiler"
-    env: RASPBIAN_REL=stretch
-  - name: "raspbian_crosscompiler"
-    env: RASPBIAN_REL=jessie
+addons:
+  apt:
+    update: true
+
+env:
+  matrix:
+  - BUILD_NAME=raspbian_crosscompiler RASPBIAN_REL=stretch
+  - BUILD_NAME=raspbian_crosscompiler RASPBIAN_REL=jessie
 
 script:
-- if [ "$TRAVIS_JOB_NAME" = "raspbian_crosscompiler" ]; then
+- if [ "$BUILD_NAME" = "raspbian_crosscompiler" ]; then
     sudo cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL raspchroot;
   fi
 
