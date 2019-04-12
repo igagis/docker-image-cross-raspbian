@@ -11,11 +11,11 @@ addons:
 
 env:
   matrix:
-  - BUILD_NAME=raspbian_crosscompiler RASPBIAN_REL=stretch
-  - BUILD_NAME=raspbian_crosscompiler RASPBIAN_REL=jessie
+  - BUILD_NAME=raspbian_qemu RASPBIAN_REL=stretch
+  - BUILD_NAME=raspbian_qemu RASPBIAN_REL=jessie
 
 script:
-- if [ "$BUILD_NAME" = "raspbian_crosscompiler" ]; then
-    sudo cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL raspchroot;
+- if [ "$BUILD_NAME" = "raspbian_qemu" ]; then
+    sudo cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL raspchroot &&
+    docker build -t theimage cross-raspbian;
   fi
-
