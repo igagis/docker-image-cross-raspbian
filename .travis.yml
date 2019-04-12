@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+- docker
+
+os: linux
+
+matrix:
+  include:
+  - name: "raspbian_crosscompiler"
+    env: RASPBIAN_REL=stretch
+  - name: "raspbian_crosscompiler"
+    env: RASPBIAN_REL=jessie
+
+script:
+- if [ "$TRAVIS_JOB_NAME" = "raspbian_crosscompiler" ]; then
+    sudo cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL raspchroot;
+  fi
+
