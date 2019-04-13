@@ -19,8 +19,7 @@ env:
 
 script:
 - if [ "$IMAGE_NAME" = "raspbian" ]; then
-    sudo ./cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL ./cross-raspbian/chroot &&
-    echo "chroot created" &&
+    sudo ./cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL ./cross-raspbian/raspchroot &&
     docker build -t igagis/$IMAGE_NAME:$IMAGE_TAG ./cross-raspbian;
   fi
 
