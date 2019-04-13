@@ -16,6 +16,6 @@ env:
 
 script:
 - if [ "$BUILD_NAME" = "raspbian_qemu" ]; then
-    sudo cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL raspchroot &&
-    docker build -t theimage cross-raspbian;
+    sudo cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL cross-raspbian/chroot &&
+    docker build -t theimage ./cross-raspbian;
   fi
