@@ -21,16 +21,15 @@ script:
 - if [ "$IMAGE_NAME" = "raspbian" ]; then
     sudo ./cross-raspbian/make-raspberry-chroot.sh -d $RASPBIAN_REL ./cross-raspbian/chroot &&
     echo "chroot created" &&
-    docker build -t theimage ./cross-raspbian;
+    docker build -t igagis/$IMAGE_NAME:$IMAGE_TAG ./cross-raspbian;
   fi
 
 before_deploy:
 - echo $DOCKER_PASSWORD | docker login --username igagis --password-stdin
-- docker tag theimage igagis/$IMAGE_NAME:$IMAGE_TAG
 
 deploy:
 - provider: script
   skip_cleanup: true
   script: docker push igagis/$IMAGE_NAME:$IMAGE_TAG
   on:
-  - branch: master
+    branch: master
