@@ -3,10 +3,10 @@
 #we want exit immediately if any command fails and we want error in piped commands to be preserved
 set -eo pipefail
 
-if [ "$(id -u)" != "0" ]; then
-   echo "error: this script must be run as root" 1>&2
-   exit 1
-fi
+# if [ "$(id -u)" != "0" ]; then
+#    echo "error: this script must be run as root" 1>&2
+#    exit 1
+# fi
 
 while [[ $# > 0 ]] ; do
 	case $1 in
