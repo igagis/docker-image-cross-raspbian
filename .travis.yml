@@ -9,6 +9,9 @@ os: linux
 addons:
   apt:
     update: true
+    packages:
+    - sbuild
+    - schroot
 
 env:
   global:
