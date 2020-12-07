@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: git clone
         uses: actions/checkout@main
+      - name: apt update
+        run: sudo apt update
       - name: create chroot
         run: sudo ./make-raspberry-chroot.sh -d ${{ matrix.image_tag }} ./raspchroot
       - name: build docker image
