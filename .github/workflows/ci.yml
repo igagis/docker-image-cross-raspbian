@@ -1,0 +1,29 @@
+name: ci
+on: [push, pull_request]
+env:
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_USERNAME: igagis
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image_tag: buster
+          - image_tag: stretch
+          - image_tag: jessie
+    name: raspbian ${{ matrix.image_tag }}
+    steps:
+      - name: git clone
+        uses: actions/checkout@main
+      - name: create chroot
+        run: ./make-raspberry-chroot.sh -d ${{ matrix.image_tag }} ./raspchroot
+      - name: build docker image
+        run: docker build -t $DOCKER_USERNAME/raspbian:${{ matrix.image_tag }} .
+      - name: login to docker hub
+        run: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+        if: startsWith(github.ref, 'refs/heads/master')
+      - name: deploy to docker hub
+        run: docker push $DOCKER_USERNAME/raspbian:${{ matrix.image_tag }} 
+        if: startsWith(github.ref, 'refs/heads/master')
