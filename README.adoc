@@ -1,9 +1,10 @@
 :name: docker-image-cross-raspbian
+:owner: igagis
 
 = {name}
 
 |====
-| link:https://github.com/cppfw/{name}/actions[image:https://github.com/cppfw/{name}/workflows/ci/badge.svg[ci status]]
+| link:https://github.com/{owner}/{name}/actions[image:https://github.com/{owner}/{name}/workflows/ci/badge.svg[ci status]]
 |====
 
 Docker images for cross compiling for raspbian.
