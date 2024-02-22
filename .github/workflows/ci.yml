@@ -10,9 +10,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - image_tag: bookworm
           - image_tag: bullseye
-          - image_tag: buster
-          - image_tag: stretch
+#          - image_tag: buster
+#          - image_tag: stretch
 #          - image_tag: jessie # jessie has been removed from raspbian server
     name: raspbian ${{ matrix.image_tag }}
     steps:
