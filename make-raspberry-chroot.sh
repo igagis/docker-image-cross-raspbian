@@ -70,8 +70,9 @@ chroot $chrootDir ./debootstrap/debootstrap --second-stage
 
 sbuild-createchroot --arch=$chrootArch --foreign --setup-only $chrootDebVer $chrootDir $chrootDebMirror
 
-#copy firmware
-chroot $chrootDir svn --non-interactive --trust-server-cert export https://github.com/raspberrypi/firmware/trunk/opt/vc /opt/vc
+# copy firmware
+# not needed in newer raspberry-OS versions
+# chroot $chrootDir svn --non-interactive --trust-server-cert export https://github.com/raspberrypi/firmware/trunk/opt/vc /opt/vc
 
 #receive GPG keys for repositories
 chroot $chrootDir apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8B48AD6246925553 7638D0442B90D010 CBF8D6FD518E17E1 379CE192D401AB61
